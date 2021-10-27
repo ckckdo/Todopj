@@ -27,7 +27,7 @@ class TodosController extends Controller
     public function update(Request $request){
         $this->validate($request, Todo::$rules);
         $item =$request->input(['id','content']);
-        Todo::where('id', $request->id)->update($item);
+        Todo::where('id', $request->id)->update(['content'=>$request->content]);
         return redirect('/');
     }
 
