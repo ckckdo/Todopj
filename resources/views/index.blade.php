@@ -169,6 +169,13 @@
             <input type="text" name="content" class="form-create">
             <input type="submit" name="submit" value="追加" class="btn-create">
           </form>
+          @if (count($errors) > 0)
+            <ul>
+              @foreach ($errors->all() as $error)
+              <li>{{$error}}</li>
+              @endforeach
+            </ul>
+          @endif
           <table>
             <thead>
             <tr>
