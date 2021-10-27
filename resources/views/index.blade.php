@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Todo List</title>
     <style>
+      body{
+        margin:0;
+      }
       .container {
         width: 100vw;
         height:100%;
         background-color:#2d197c;
         padding-top:100px;
+        padding-bottom:100px;
       }
       .card{
         width:50vw;
@@ -167,7 +171,8 @@
                 <td data-label="タスク名"><input type="text" class="todo-content" value={{$item->content}}></td></form>
               <form action="todo/update" method="post">@csrf
                 <td data-label="更新">
-                <input type="hidden" name="task" value={{$item->content}}>
+                <input type="hidden" name="id" value={{$item->id}}>
+                <input type="hidden" name="content" value={{$item->content}}>
                 <input type="submit" class="btn-update" value="更新">
               </form>
                 </td>
