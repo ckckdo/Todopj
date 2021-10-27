@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Todo;
+use Illuminate\Support\Facades\DB;
 
 class TodosController extends Controller
 {
@@ -20,20 +21,20 @@ class TodosController extends Controller
         $this->validate($request, Todo::$rules);
         $item = $request->all();
         Todo::create($item);
-        return view('index');
+        return redirect('/');
     }
 
     public function update(Request $request){
         $this->validate($request, Todo::$rules);
-        $item = $request->all();
-        Todo::update($item);
-        return view('index');
+        $item =$request->only(['id','content']);
+        Todo::where('id', $request->id)->update($item);
+        return redirect('/');
     }
 
     public function delete(Request $request){
         $this->validate($request, Todo::$rules);
         $item = $request->id();
         Todo::delete($item);
-        return redirect('index');
+        return redirect('/');
     }
 }

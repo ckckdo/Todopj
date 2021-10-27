@@ -165,13 +165,14 @@
                 <td data-label="作成日"><p class="time">{{$item->created_at}}</p></td>
                 <form action="todo/create" method="post">@csrf
                 <td data-label="タスク名"><input type="text" class="todo-content" value={{$item->content}}></td></form>
-              <form action="todo/update?id={{$item->id}}" method="post">@csrf
+              <form action="todo/update" method="post">@csrf
                 <td data-label="更新">
-                  <input type="submit" class="btn-update" value="更新">
+                <input type="hidden" name="task" value={{$item->content}}>
+                <input type="submit" class="btn-update" value="更新">
               </form>
                 </td>
                 <td data-label="削除">
-                <form action="todo/delete?id={{$item->id}}" method="post">@csrf
+                <form action="todo/delete" method="post">@csrf
                   <input type="submit" class="btn-delete" value="削除">
               </form>
                 </td>
