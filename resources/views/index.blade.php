@@ -167,12 +167,11 @@
               @foreach($items as $item)
               <tr>
                 <td data-label="作成日"><p class="time">{{$item->created_at}}</p></td>
-                <form action="todo/create" method="post">@csrf
-                <td data-label="タスク名"><input type="text" class="todo-content" value={{$item->content}}></td></form>
+                <form action="todo/update" method="post">@csrf
+                <td data-label="タスク名"><input type="text" name="content" class="todo-content" value={{$item->content}}></td></form>
               <form action="todo/update" method="post">@csrf
                 <td data-label="更新">
                 <input type="hidden" name="id" value={{$item->id}}>
-                <input type="hidden" name="content" value={{$item->content}}>
                 <input type="submit" class="btn-update" value="更新">
               </form>
                 </td>
