@@ -32,9 +32,7 @@ class TodosController extends Controller
     }
 
     public function delete(Request $request){
-        $this->validate($request, Todo::$rules);
-        $item = $request->id();
-        Todo::delete($item);
+        Todo::find($request->id)->delete();
         return redirect('/');
     }
 }

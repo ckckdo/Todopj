@@ -8,6 +8,10 @@
       body{
         margin:0;
       }
+      p{
+        padding: 0;
+        margin:3px;
+      }
       .container {
         width: 100vw;
         height:100%;
@@ -45,7 +49,8 @@
         background-color: #dc70fa;
       }
       .form-create{
-        width: 80%;
+        width: 100%;
+        margin-right:10px;
         padding: 5px;
         border-radius: 5px;
         border: 1px solid #ccc;
@@ -56,38 +61,26 @@
       .create{
         display:flex;
         justify-content:center;
+        margin-bottom:30px;
       }
       table{
         margin:0 auto;
+        text-align:center;
       }
-      @media screen and (max-width:768px){
-        table{
-          width:100%;
-        }
-        thead{
-          display:none;
-        }
-        tr{
-          margin-bottom:2px;
-          display:block;
-        }
-        td{
-          width:100%;
-          display: block;
-          text-align:right;
-          padding:2px;
-        }
-        .th{
-          display: block;
+      tr{
+        padding:0px;
+      }
+      td{
+        padding:0 5px;
+      }
+      .time{
           font-size:14px;
-          font-weight:bold;
-          padding:10px;
+          margin:0px;
         }
-      table td:before {
-        content:attr(data-label);
-        float:left;
-        font-weight: bold;
-        }
+      .todo-content{
+        padding:5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
       }
       .btn-update{
         text-align: left;
@@ -106,7 +99,7 @@
         color: #fff;
         background-color: #fa9770;
       }
-    .btn-delete{
+      .btn-delete{
       text-align: left;
         border: 2px solid #71fadc;
         font-size: 12px;
@@ -123,25 +116,47 @@
         color: #fff;
         background-color: #71fadc;
       }
-
-    @media screen and (max-width:768px){
-      .btn-update,.btn-delete{
+      @media screen and (max-width:768px){
+        table{
+          width:100%;
+        }
+        thead{
+          display:none;
+        }
+        tr{
+          margin-bottom:2px;
+          display:block;
+        }
+        td{
+          width:100%;
+          display: flex;
+          justify-content:space-between;
+          padding:2px;
+        }
+        .th{
+          display: block;
+          font-size:14px;
+          font-weight:bold;
+        }
+        table td:before {
+        content:attr(data-label);
+        float: left;
+        font-weight: bold;
+        font-size:10px;
+        line-height:20px;
+        }
+        .btn-update,.btn-delete{
         font-size: 10px;
         padding: 3px 8px;
+        }
+        .todo-content{
+          width:60%;
+        }
+        .time{
+          font-size:8px;
+          margin:0px;
+        }
       }
-      .todo-content{
-        width:80%;
-      }
-      .time{
-        font-size:8px;
-      }
-      table td:before {
-            content:attr(data-label);
-            float:left;
-            font-weight: bold;
-            font-size:10px;
-      }
-    }
 </style>
 </head>
   <body>
@@ -168,8 +183,7 @@
               <tr>
                 <td data-label="作成日"><p class="time">{{$item->created_at}}</p></td>
                 <form action="todo/update" method="post">@csrf
-                <td data-label="タスク名"><input type="text" name="content" class="todo-content" value={{$item->content}}></td></form>
-              <form action="todo/update" method="post">@csrf
+                <td data-label="タスク名"><input type="text" name="content" class="todo-content" value={{$item->content}}></td>
                 <td data-label="更新">
                 <input type="hidden" name="id" value={{$item->id}}>
                 <input type="submit" class="btn-update" value="更新">
@@ -177,6 +191,7 @@
                 </td>
                 <td data-label="削除">
                 <form action="todo/delete" method="post">@csrf
+                  <input type="hidden" name="id" value={{$item->id}}>
                   <input type="submit" class="btn-delete" value="削除">
               </form>
                 </td>
